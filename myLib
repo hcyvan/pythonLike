@@ -1,0 +1,7 @@
+#include "myLib.h"
+#include <stdexcept>
+void argcTest(const int argc, const int youNeed)
+{
+	if(argc != youNeed){
+		throw std::runtime_error("Worng argc!!!");
+	}
