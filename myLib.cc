@@ -7,3 +7,4 @@ void argcTest(const int argc, const int youNeed)
 		std::cout << "You should enter "<<(youNeed-1)<<(youNeed>2?" arguments.":" argument.")<<std::endl;
 		throw std::runtime_error("Worng argc!!!");
 	}
+}
