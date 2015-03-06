@@ -22,4 +22,4 @@ T setpy( T container)
 	container.erase(uniqueSet,container.end());
 	return container;
 }
-#end
+#endif
