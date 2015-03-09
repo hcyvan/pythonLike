@@ -23,4 +23,13 @@ T setpy( T container)
 	container.erase(uniqueSet,container.end());
 	return container;
 }
+//turn number to string
+template<typename T> 
+std::string num2string(T i)
+{
+	std::ostringstream out;
+	out << i;
+	std::string str=out.str();
+	return str;
+}
 #endif
