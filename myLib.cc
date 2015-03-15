@@ -1,3 +1,6 @@
+//myLib.cc
+// This file include the defination of functions in myLib.h
+// This file was complied to myLib.o and add to libmyLib.a
 #include "myLib.h"
 #include <stdexcept>
 #include <iostream>
