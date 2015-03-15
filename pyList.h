@@ -8,18 +8,39 @@
 class List{
 public:
 	List()=default;
-	//List a={"a","bc"} or List i={1,2,3} or...
+	//constructor: overload when the list of elements is the same type. eg: List a={1,2,3} and List b={"cheng","liu","wang"}
 	template<typename T> List(std::initializer_list<T>);
-	void show_lst();                    //test function
+	//constructor: overload when the list of elements is not the same type. eg: List a={1,1.3,"cheng",'c'}
+	template<typename... Args> List(const Args&... rest);
+	//test function
+	void show_lst();                    
 private:
+	//push a list of elements to lst recursively
+	template<typename T,typename...Args> void push_recur(const T&,Args&...);
+	template<typename T> void push_recur(const T&);
 	std::vector<std::string> lst;
 };
-//function definationi
-template<typename T> List::List(std::initializer_list<T> il)
+
+template<typename T> List::List(std::initializer_list<T>)
 {
 	for(auto beg=il.begin();beg!=il.end();++beg){
 		std::string a=num2string(*beg);
 		lst.push_back(a);
 	}
+}
+template<typename... Args> List::List(const Args&... rest)
+{
+	this->push_recur(rest...);
+}
+template<typename T> void List::push_recur(const T& t)
+{
+	std::string a=num2string(t);
+	lst.push_back(a);
+}
+template<typename T,typename...Args> void List::push_recur(const T& t,Args&... rest)
+{
+	std::string a=num2string(t);
+	lst.push_back(a);
+	push_recur(rest...);
 }
 #endif
