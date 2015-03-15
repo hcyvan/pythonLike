@@ -1,3 +1,5 @@
+// myLib.h
+// This file include some Macros and the declearation of some useful functions
 #ifndef MYLIB_H
 #define MYLIB_H
 #include <iostream>
