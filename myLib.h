@@ -8,8 +8,7 @@
 //check the argc of main
 void argcTest(const int argc, const int youNeed);
 //print the elements of a container
-template<typename T>
-void show(const T &container)
+template<typename T> void show(const T &container)
 {
 	for(auto element:container){
 		std::cout << element <<" ";
@@ -17,12 +16,10 @@ void show(const T &container)
 	std::cout << std::endl;
 }
 //turn number to string
-template<typename T> 
-std::string num2string(T i)
+template<typename T> std::string num2string(T i)
 {
 	std::ostringstream out;
 	out << i;
-	std::string str=out.str();
-	return str;
+	return out.str();
 }
 #endif
