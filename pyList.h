@@ -23,10 +23,8 @@ private:
 
 template<typename T> List::List(std::initializer_list<T>)
 {
-	for(auto beg=il.begin();beg!=il.end();++beg){
-		std::string a=num2string(*beg);
-		lst.push_back(a);
-	}
+	for(auto beg=il.begin();beg!=il.end();++beg)
+		lst.push_back(num2string(*beg));
 }
 template<typename... Args> List::List(const Args&... rest)
 {
@@ -34,13 +32,11 @@ template<typename... Args> List::List(const Args&... rest)
 }
 template<typename T> void List::push_recur(const T& t)
 {
-	std::string a=num2string(t);
-	lst.push_back(a);
+	lst.push_back(num2string(t));
 }
 template<typename T,typename...Args> void List::push_recur(const T& t,Args&... rest)
 {
-	std::string a=num2string(t);
-	lst.push_back(a);
+	lst.push_back(num2string(t));
 	push_recur(rest...);
 }
 #endif
