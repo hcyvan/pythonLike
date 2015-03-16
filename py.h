@@ -9,11 +9,4 @@ template<typename T> T setpy( T container)
 	container.erase(uniqueSet,container.end());
 	return container;
 }
-//turn number to string
-template<typename T> std::string num2string(const T& i)
-{
-	std::ostringstream out;
-	out << i;
-	return out.str();
-}
 #endif
