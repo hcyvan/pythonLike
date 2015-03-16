@@ -3,6 +3,7 @@
 #ifndef MYLIB_H
 #define MYLIB_H
 #include <iostream>
+#include <sstream>
 #define ERRORMESSAGE std::cerr<<"Error:"<<__FILE__<<" : in function "<<__func__<<" at line "<<__LINE__<<std::endl
 #define DONE std::cout<<__func__<<" is done! DONE is in "<<__FILE__<<", line "<<__LINE__<<std::endl
 //check the argc of main
