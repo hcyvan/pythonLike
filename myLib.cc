@@ -11,3 +11,8 @@ void argcTest(const int argc, const int youNeed)
 		throw std::runtime_error("Worng argc!!!");
 	}
 }
+std::string num2string(const int& i)
+{	
+	std::string str=std::to_string(i);
+	return str;
+}
