@@ -21,7 +21,7 @@ private:
 	std::vector<std::string> lst;
 };
 
-template<typename T> List::List(std::initializer_list<T>)
+template<typename T> List::List(std::initializer_list<T> il)
 {
 	for(auto beg=il.begin();beg!=il.end();++beg)
 		lst.push_back(num2string(*beg));
