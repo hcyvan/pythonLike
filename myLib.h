@@ -17,6 +17,9 @@ template<typename T> void show(const T &container)
 	std::cout << std::endl;
 }
 //turn number to string
+//overload when the argument is "const int&"
+std::string num2string(const int& i);
+//overload when the argument is the other type
 template<typename T> std::string num2string(T i)
 {
 	std::ostringstream out;
