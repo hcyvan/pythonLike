@@ -4,6 +4,19 @@
 #include "myLib.h"
 #include <stdexcept>
 #include <iostream>
+//add overload function in std spacename
+namespace std{
+	std::string to_string(const std::string &i)
+	{
+		return i;
+	}
+	std::string to_string(const char &i)
+	{
+		char s[2]={i,'\0'};	//turn char to char[];
+		return s;
+	}
+
+}
 void argcTest(const int argc, const int youNeed)
 {
 	if(argc != youNeed){
