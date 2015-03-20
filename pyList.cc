@@ -6,3 +6,8 @@ void List::show_lst()
 		std::cout<<elem<< " ";
 	std::cout<<std::endl;
 }
+//member function
+std::vector<std::string>::size_type List::pycount(const std::string & rs) const
+{
+	return count(lst.begin(),lst.end(),rs);
+}
