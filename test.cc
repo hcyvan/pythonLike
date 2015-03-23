@@ -4,9 +4,6 @@
 int main()
 {
 	List a={1,"cheng",'z',"cheng",1.2};
-	List c;
-	a=a;
-	List b=c=a;
 	a.show_lst();
 	b.show_lst();
 	c.show_lst();
