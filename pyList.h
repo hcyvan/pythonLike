@@ -14,6 +14,10 @@ public:
 	//constructor: overload when the list of elements is not the same type. eg: List a={1,1.3,"cheng",'c'}
 	template<typename... Args>
 	List(const Args&... rest);
+	//copy constructor
+	List(const List&);
+	//copy assignment operator
+	List & operator=(const List &);
 	//test function
 	void show_lst(); 
 	//member function

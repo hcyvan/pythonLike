@@ -12,3 +12,11 @@ std::vector<std::string>::size_type List::pycount(const std::string & rs) const
 {
 	return std::count(lst.begin(),lst.end(),rs);
 }
+//copy constructor
+List::List(const List &rhs):lst(rhs.lst){}
+//copy assignment operator
+List & List::operator=(const List &rhs) 
+{
+	lst=rhs.lst;
+	return *this;
+}
