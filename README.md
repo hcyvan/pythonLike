@@ -9,3 +9,4 @@ libmyLib.a include:myLib.cc pyLib.cc<br>
 2.we can use <B>pyList.h pyList.cc </B>and <B>py.h</B> to initialize the use c++ like python<br>
 3.myLib.h inclue some usefull macros and the declare of myLib.cc<br>
 <h1>This repository is in building...</h1>
+<h1>I'm learning to how to use git</h1>
