@@ -8,8 +8,8 @@ pyList.o:pyList.cc
 	g++49 -std=c++11 -c -o pyList.o pyList.cc
 .PHONY:clean
 clean:
-	rm myLib.o pyList.o
+	rm -f myLib.o pyList.o
 .PHONY:clean-all
 clean-all:
 	make clean
-	rm libmyLib.a test
+	rm -f libmyLib.a test
