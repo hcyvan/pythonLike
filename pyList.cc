@@ -1,5 +1,6 @@
 #include "pyList.h"
 #include <iostream>
+#include <algorithm>
 void List::show_lst()
 {
 	for(auto elem :lst)
@@ -9,5 +10,5 @@ void List::show_lst()
 //member function
 std::vector<std::string>::size_type List::pycount(const std::string & rs) const
 {
-	return count(lst.begin(),lst.end(),rs);
+	return std::count(lst.begin(),lst.end(),rs);
 }
