@@ -1,5 +1,5 @@
 //如果去掉using std::string 则显示编译错误？？？？？
-//不能用int等进行拷贝初始化
+// 用placement new获得std::string指针，不能用~string()析构，以至于不能用～element()析构？？？
 #include <iostream>
 #include <string>
 using std::string;
@@ -8,10 +8,10 @@ class element{
 public:
 	//constructor
 	element():type(INT),ival(0){}
-	element(const char &c):type(CHAR),cval(c){};
-	element(const int &i):type(INT),ival(i){};
-	element(const double &d):type(DBL),dval(d){};
-	explicit element(const std::string &s):type(STR),sval(s){};		//直接初始化std::string sval 是否有问题???
+	explicit element(const char &c):type(CHAR),cval(c){};
+	explicit element(const int &i):type(INT),ival(i){}
+	explicit element(const double &d):type(DBL),dval(d){}
+	explicit element(const std::string &s):type(STR),sval(s){}
 	//copy constructor
 	element(const element &t):type(t.type){copyUnion(t);}
 	//copy-assignment operator
@@ -32,11 +32,6 @@ private:
 		std::string sval;
 	};
 	void copyUnion(const element &);
-	/*
-	void copyUnion(const char &);
-	void copyUnion(const int &);
-	void copyUnion(const double &);
-	*/
 };
 void element::copyUnion(const element &t)
 {
@@ -51,28 +46,10 @@ void element::copyUnion(const element &t)
 			dval=t.dval;
 			break;
 		case element::STR:
-			new(&sval)std::string(t.sval);				//???????????????
-			//sval=t.sval;
+			new(&sval)std::string(t.sval);				// placement new
 			break;
 	}
 }
-/*
-void element::copyUnion(const char &c)
-{
-	cval=c;
-	type=CHAR;
-}
-void element::copyUnion(const int &i)
-{
-	cval=i;
-	type=INT;
-}
-void element::copyUnion(const double &d)
-{
-	cval=d;
-	type=DBL;
-}
-*/
 //copy-constructor
 	
 
@@ -148,11 +125,11 @@ int main()
 	a='b';
 	a="cheng";
 	element b=a;
-	element c=1;
 	element d(1);
 	std::string s="cheng";			//此处必须将“cheng”转换为std::string
 	element e(s);
 	std::cout<<a<<std::endl;
-	std::cout<<c<<std::endl;
+	std::cout<<d<<std::endl;
 	std::cout<<e<<std::endl;
+	e.~element();
 }
