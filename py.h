@@ -1,8 +1,8 @@
 #ifndef PY_H
 #define PY_H
 #include <sstream>
-//setpy() :from python's set()
-template<typename T>
+//setpy() :from python's set().
+template<typename T
 T setpy( T container)
 {
 	sort(container.begin(),container.end());
