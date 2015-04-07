@@ -1,38 +1,4 @@
-//如果去掉using std::string 则显示编译错误？？？？？
-// 用placement new获得std::string指针，不能用~string()析构，以至于不能用～element()析构？？？
-#include <iostream>
-#include <string>
-using std::string;
-class element{
-	friend std::ostream &operator<<(std::ostream &,const element &);
-public:
-	//constructor
-	element():type(INT),ival(0){}
-	explicit element(const char &c):type(CHAR),cval(c){};
-	explicit element(const int &i):type(INT),ival(i){}
-	explicit element(const double &d):type(DBL),dval(d){}
-	explicit element(const std::string &s):type(STR),sval(s){}
-	//copy constructor
-	element(const element &t):type(t.type){copyUnion(t);}
-	//copy-assignment operator
-	element &operator=(const element &);
-	element &operator=(char);
-	element &operator=(int);
-	element &operator=(double);
-	element &operator=(const std::string &);
-	//destructor
-	~element(){if(type==STR) sval.~string();}
-	//reload operator
-private:
-	enum {INT,CHAR, DBL,STR} type;
-	union{
-		char cval;
-		int ival;
-		double dval;
-		std::string sval;
-	};
-	void copyUnion(const element &);
-};
+#include "element.h"
 void element::copyUnion(const element &t)
 {
 	switch(t.type){
@@ -50,9 +16,17 @@ void element::copyUnion(const element &t)
 			break;
 	}
 }
+//constructor
+element::element():type(INT),ival(0){}
+element::element(const char &c):type(CHAR),cval(c){}
+element::element(const int &i):type(INT),ival(i){}
+element::element(const double &d):type(DBL),dval(d){}
+element::element(const std::string &s):type(STR),sval(s){}
 //copy-constructor
-	
-
+element::element(const element &t):type(t.type)
+{
+	copyUnion(t);
+}
 //copy-assignment operator
 element &element::operator=(const element &t)
 {
@@ -117,6 +91,15 @@ std::ostream &operator<<(std::ostream &os,const element &e)
 	}
 	return os;
 }
+//Anything is input as string...
+std::istream &operator>>(std::istream &is,element &e)
+{
+	std::string buffer;
+	is>>buffer;
+	e=buffer;
+	return is;
+}
+/*
 //********************************88
 int main()
 {
@@ -128,8 +111,9 @@ int main()
 	element d(1);
 	std::string s="cheng";			//此处必须将“cheng”转换为std::string
 	element e(s);
+	std::cin>> e;
 	std::cout<<a<<std::endl;
 	std::cout<<d<<std::endl;
 	std::cout<<e<<std::endl;
-	e.~element();
 }
+*/
