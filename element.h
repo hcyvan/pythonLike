@@ -23,6 +23,8 @@ public:
 	element &operator=(int);
 	element &operator=(double);
 	element &operator=(const std::string &);
+	//move constructor -std=c++11
+	element(element &&) noexcept;
 	//destructor
 	~element(){if(type==STR) sval.~string();}
 	//reload operator

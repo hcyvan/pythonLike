@@ -72,6 +72,24 @@ element &element::operator=(const std::string &s)
 	type=STR;
 	return *this;
 }
+element::element(element &&t) noexcept:type(t.type)
+{
+	//现在不行，移动构造后没有消除原先的值 
+	switch(t.type){
+		case element::CHAR:
+			cval=t.cval;
+			break;
+		case element::INT:	
+			ival=t.ival;
+			break;
+		case element::DBL:
+			dval=t.dval;
+			break;
+		case element::STR:
+			new(&sval)std::string(t.sval);				// placement new
+			break;
+	}
+}
 //reload operator
 std::ostream &operator<<(std::ostream &os,const element &e)
 {
