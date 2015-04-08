@@ -24,6 +24,7 @@ int main()
 	a=1;
 	a='b';
 	a="cheng";
+	a=1;
 	element b=a;
 	element d(1);
 	std::string s="cheng";			//此处必须将“cheng”转换为std::string
