@@ -72,6 +72,8 @@ element &element::operator=(const std::string &s)
 	type=STR;
 	return *this;
 }
+/*
+移动语义对于指针成员有意义,此处不合适
 element::element(element &&t) noexcept:type(t.type)
 {
 	//现在不行，移动构造后没有消除原先的值 
@@ -90,6 +92,7 @@ element::element(element &&t) noexcept:type(t.type)
 			break;
 	}
 }
+*/
 //reload operator
 std::ostream &operator<<(std::ostream &os,const element &e)
 {
