@@ -10,4 +10,6 @@ T setpy( T container)
 	container.erase(uniqueSet,container.end());
 	return container;
 }
+//is_py_int():
+bool is_py_int(const std::string &str);
 #endif
