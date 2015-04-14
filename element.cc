@@ -1,7 +1,8 @@
 #include "element.h"
+#include "py.h"
 void element::copyUnion(const element &t)
 {
-	switch(t.type){
+	switch(t.type_id){
 		case element::CHAR:
 			cval=t.cval;
 			break;
@@ -17,67 +18,67 @@ void element::copyUnion(const element &t)
 	}
 }
 //constructor
-element::element():type(INT),ival(0){}
-element::element(const char &c):type(CHAR),cval(c){}
-element::element(const int &i):type(INT),ival(i){}
-element::element(const double &d):type(DBL),dval(d){}
-element::element(const std::string &s):type(STR),sval(s){}
+element::element():type_id(INT),ival(0){}
+element::element(const char &c):type_id(CHAR),cval(c){}
+element::element(const int &i):type_id(INT),ival(i){}
+element::element(const double &d):type_id(DBL),dval(d){}
+element::element(const std::string &s):type_id(STR),sval(s){}
 //copy-constructor
-element::element(const element &t):type(t.type)
+element::element(const element &t):type_id(t.type_id)
 {
 	copyUnion(t);
 }
 //copy-assignment operator
 element &element::operator=(const element &t)
 {
-	if(type==STR && t.type!=STR)	
+	if(type_id==STR && t.type_id!=STR)	
 		sval.~string();
-	if(type==STR && t.type==STR)	
+	if(type_id==STR && t.type_id==STR)	
 		sval=t.sval;
 	else
 		copyUnion(t);
-	type=t.type;
+	type_id=t.type_id;
 	return *this;
 }
 element &element::operator=(char c)
 {
-	if(type==STR)
+	if(type_id==STR)
 		sval.~string();
 	cval=c;
-	type=CHAR;
+	type_id=CHAR;
 	return *this;
 }
 element &element::operator=(int i)
 {
-	if(type==STR)
+	if(type_id==STR)
 		sval.~string();
 	ival=i;
-	type=INT;
+	type_id=INT;
 	return *this;
 }
 element &element::operator=(double d)
 {
-	if(type==STR)
+	if(type_id==STR)
 		sval.~string();
 	dval=d;
-	type=DBL;
+	type_id=DBL;
 	return *this;
 }
 element &element::operator=(const std::string &s)
 {
-	if(type==STR)
+	if(type_id==STR)
 		sval=s;
 	else
 		new(&sval) std::string(s);
-	type=STR;
+	type_id=STR;
 	return *this;
 }
 /*
 移动语义对于指针成员有意义,此处不合适
-element::element(element &&t) noexcept:type(t.type)
+element::element(element &&t) noexcept:type_id(t.type_id)
 {
 	//现在不行，移动构造后没有消除原先的值 
-	switch(t.type){
+	switch(t.type_id){
 		case element::CHAR:
 			cval=t.cval;
 			break;
@@ -93,10 +94,30 @@ element::element(element &&t) noexcept:type(t.type)
 	}
 }
 */
+//member function
+int element::get_type_id() const
+{
+		return type_id;
+}
+
+//non-member function
+const char *type(const element& t) 
+{
+	switch(t.get_type_id()){
+			case 0:
+				return "int";
+			case 1:
+				return "double";
+			case 2:
+				return "int";
+			case 3:
+				return "std::string";
+	}
+}
 //reload operator
 std::ostream &operator<<(std::ostream &os,const element &e)
 {
-	switch(e.type){
+	switch(e.type_id){
 		case element::CHAR:
 			os<<e.cval;
 			break;
@@ -112,29 +133,14 @@ std::ostream &operator<<(std::ostream &os,const element &e)
 	}
 	return os;
 }
-//Anything is input as string...
+//Anything is input as string and int.........................................???
 std::istream &operator>>(std::istream &is,element &e)
 {
 	std::string buffer;
 	is>>buffer;
-	e=buffer;
+	if(is_py_int(buffer))
+		e=stoi(buffer);
+	else
+		e=buffer;
 	return is;
 }
-/*
-//********************************88
-int main()
-{
-	element a;
-	a=1;
-	a='b';
-	a="cheng";
-	element b=a;
-	element d(1);
-	std::string s="cheng";			//此处必须将“cheng”转换为std::string
-	element e(s);
-	std::cin>> e;
-	std::cout<<a<<std::endl;
-	std::cout<<d<<std::endl;
-	std::cout<<e<<std::endl;
-}
-*/

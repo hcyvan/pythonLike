@@ -26,10 +26,14 @@ public:
 	//move constructor -std=c++11
 	//element(element &&) noexcept;
 	//destructor
-	~element(){if(type==STR) sval.~string();}
+	~element(){if(type_id==STR) sval.~string();}
 	//reload operator
+	//member function
+	int get_type_id()const;
+
+
 private:
-	enum {INT,CHAR, DBL,STR} type;
+	enum {INT,DBL,CHAR, STR} type_id;
 	union{
 		char cval;
 		int ival;
@@ -38,4 +42,6 @@ private:
 	};
 	void copyUnion(const element &);
 };
+//non-member funciton
+const char *type(const element& t); 
 #endif

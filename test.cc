@@ -2,6 +2,7 @@
 #include "pyList.h"
 #include "element.h"
 #include <iostream>
+#include <vector>
 /*
 int main()
 {
@@ -20,9 +21,13 @@ int main()
 */
 int main()
 {
-	element c("hhh");
-	element f=std::move(c);
-	std::cout<<"c="<<c<<std::endl;
-	std::cout<<"f="<<f<<std::endl;
+	element d;
+	element e(0x7);
+	int a;
+	std::cin >> d;
+	std::cout<<"d="<<d<<std::endl;
+	std::cout<<"e="<<e<<std::endl;
+	std::cout<<type(d)<<std::endl;
+	std::cout<<type(e)<<std::endl;
 }
 
