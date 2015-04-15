@@ -32,4 +32,13 @@ template<typename T> std::string num2string(T i)
 	out << i;
 	return out.str();
 }
+class Time{
+public:
+	Time():start_t(clock()),start_line(__LINE__){}
+	~Time(){std::cout<<__LINE__<<" to "<<start_line << " : "<<clock()-start_t<<"ms"<<std::endl;}
+private:
+	clock_t start_t;
+	int start_line;
+};
+
 #endif
