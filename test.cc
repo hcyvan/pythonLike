@@ -1,5 +1,6 @@
 //This file is use to test the python-like classes
 #include "pyList.h"
+#include "myLib.h"
 #include "element.h"
 #include <iostream>
 #include <vector>
@@ -19,6 +20,7 @@ int main()
 	std::cout <<a.pycount("cheng")<<std::endl;
 }
 */
+/*
 int main()
 {
 	element d;
@@ -30,4 +32,14 @@ int main()
 	std::cout<<type(d)<<std::endl;
 	std::cout<<type(e)<<std::endl;
 }
-
+*/
+int main()  
+{  
+	Time t;
+	Time p;
+	t.start(__LINE__);
+	for(int i=0;i<100000;++i)
+			std::cout<<i<<std::endl;
+	t.end(__LINE__);
+	t.show();
+}  

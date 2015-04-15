@@ -4,6 +4,8 @@
 #define MYLIB_H
 #include <iostream>
 #include <sstream>
+#include <time.h>
+#include <stdexcept>
 #define ERRORMESSAGE std::cerr<<"Error:"<<__FILE__<<" : in function "<<__func__<<" at line "<<__LINE__<<std::endl
 #define DONE std::cout<<__func__<<" is done! DONE is in "<<__FILE__<<", line "<<__LINE__<<std::endl
 //add overload function in std spacename
@@ -32,13 +34,22 @@ template<typename T> std::string num2string(T i)
 	out << i;
 	return out.str();
 }
+//Time is a class to calculate the efficiency of some lines of code
 class Time{
 public:
-	Time():start_t(clock()),start_line(__LINE__){}
-	~Time(){std::cout<<__LINE__<<" to "<<start_line << " : "<<clock()-start_t<<"ms"<<std::endl;}
+	Time();
+	Time(const Time &)=delete;
+	Time &operator=(const Time &)=delete;
+	//member function
+	void start(int i=0);
+	void end(int i=0);
+	void show() const;
 private:
 	clock_t start_t;
+	clock_t end_t;
 	int start_line;
+	int end_line;
+	bool is_start;
+	bool is_end;
 };
-
 #endif
